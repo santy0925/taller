@@ -30,7 +30,7 @@ app.post("/materias", (req, res) => {
     const sql = "INSERT INTO materias (NombreMateria, Descripcion, Nota) VALUES(?, ?, ?)";
 
     db.query(
-        sql, [materia.NombreMateria, materia.Descripcion, materia.Nota],
+        sql, [materia.NombreMateria, materia.Descripcion , materia.Nota],
         (err, result) => {
             if (err) {
                 console.error("Error al crear una nueva materia:", err);

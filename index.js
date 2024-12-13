@@ -24,6 +24,7 @@ db.connect((err) => {
     }
 })
 
+
 // crear una nueva materia
 app.post("/materias", (req, res) => {
     const materia = req.body;

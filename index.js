@@ -73,6 +73,22 @@ app.get("/materias/:id",(req, res) => {
     });
 });
 
+//actualizar la materia desde su id
+app.put("/materias/:id",(req, res) => {
+    const id = req.params.id;
+    const materia = req.body;
+    const sql =  "update materias SET NombreMateria = ?, Descripcion = ?, Nota = ?"
+    db.query(sql, [materia.NombreMateria, materia.Descripcion , materia.Nota, id], (err) => {
+        if (err) {
+            console.error("Error al obtener la materia desde su id", err);
+            res.status(500).json({ error: "error al actualizar"});
+        } else {
+            console.log("materia obtenida con exito");
+            res.status(200).json(results);
+        }
+    });
+});
+
 // Iniciar al servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`)

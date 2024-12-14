@@ -12,7 +12,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "practica"
+    database: "practica2"
 })
 
 // conectar a la base de datos
@@ -43,8 +43,38 @@ app.post("/materias", (req, res) => {
     )
 })
 
+//obtrener todas las materias
+app.get("/materias",(req, res) => {
+    const sql = "SELECT * FROM materias";
+    db.query(sql, (err, results) =>{
+        if (err) {
+            console.error("Error al obtener las materias", err);
+            res.status(500).json({ error: "error al obtener las materias de la tabla"});
+        } else {
+            console.log("materia obtenida con exito");
+            res.status(200).json(results);
+        }
+    });
+});
+
+//llamar materia a travez de su id
+//URL
+app.get("/materias/:id",(req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM materias WHERE IDMateria = ?"
+    db.query(sql, [id], (err, results) => {
+        if (err) {
+            console.error("Error al obtener la materia", err);
+            res.status(500).json({ error: "error al cargar las materias a la tabla"});
+        } else {
+            console.log("materia obtenida con exito");
+            res.status(200).json(results);
+        }
+    });
+});
 
 // Iniciar al servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`)
 })
+

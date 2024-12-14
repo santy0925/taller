@@ -83,11 +83,13 @@ app.put("/materias/:id",(req, res) => {
             console.error("Error al obtener la materia desde su id", err);
             res.status(500).json({ error: "error al actualizar"});
         } else {
-            console.log("materia obtenida con exito");
-            res.status(200).json(results);
+            console.log("materia actualizada");
+            res.status(201).json(results);
         }
     });
 });
+
+
 
 // Iniciar al servidor
 app.listen(port, () => {
